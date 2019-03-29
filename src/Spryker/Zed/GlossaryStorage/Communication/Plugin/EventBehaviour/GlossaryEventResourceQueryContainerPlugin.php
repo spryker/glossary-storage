@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Spryker\Zed\GlossaryStorage\Communication\Plugin\Event;
+namespace Spryker\Zed\GlossaryStorage\Communication\Plugin\EventBehaviour;
 
 use Orm\Zed\Glossary\Persistence\Map\SpyGlossaryKeyTableMap;
 use Propel\Runtime\ActiveQuery\ModelCriteria;
