@@ -5,14 +5,14 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Spryker\Zed\GlossaryStorage\Communication\Plugin\Publishing;
+namespace Spryker\Zed\GlossaryStorage\Communication\Plugin\Publisher;
 
 use Spryker\Zed\Glossary\Dependency\GlossaryEvents;
-use Spryker\Zed\GlossaryStorage\Communication\Plugin\Publishing\GlossaryKey\GlossaryWritePublisherPlugin;
-use Spryker\Zed\GlossaryStorage\Communication\Plugin\Publishing\GlossaryKey\GlossaryDeletePublisherPlugin;
+use Spryker\Zed\GlossaryStorage\Communication\Plugin\Publisher\GlossaryKey\GlossaryWritePublisherPlugin;
+use Spryker\Zed\GlossaryStorage\Communication\Plugin\Publisher\GlossaryKey\GlossaryDeletePublisherPlugin;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
-use Spryker\Zed\PublishingExtension\Dependency\PublisherEventRegistryInterface;
-use Spryker\Zed\PublishingExtension\Dependency\PublisherRegistryInterface;
+use Spryker\Zed\PublisherExtension\Dependency\Plugin\PublisherEventRegistryInterface;
+use Spryker\Zed\PublisherExtension\Dependency\Plugin\PublisherRegistryPluginInterface;
 
 /**
  * @method \Spryker\Zed\GlossaryStorage\Communication\GlossaryStorageCommunicationFactory getFactory()
@@ -20,7 +20,7 @@ use Spryker\Zed\PublishingExtension\Dependency\PublisherRegistryInterface;
  * @method \Spryker\Zed\GlossaryStorage\GlossaryStorageConfig getConfig()
  * @method \Spryker\Zed\GlossaryStorage\Persistence\GlossaryStorageQueryContainerInterface getQueryContainer()
  */
-class GlossaryStoragePublisherRegistry extends AbstractPlugin implements PublisherRegistryInterface
+class GlossaryStoragePublisherRegistryPlugin extends AbstractPlugin implements PublisherRegistryPluginInterface
 {
 
     /**
