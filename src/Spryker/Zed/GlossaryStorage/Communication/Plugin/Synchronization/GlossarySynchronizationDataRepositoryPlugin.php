@@ -7,20 +7,18 @@
 
 namespace Spryker\Zed\GlossaryStorage\Communication\Plugin\Synchronization;
 
-use Propel\Runtime\ActiveQuery\ModelCriteria;
 use Spryker\Shared\GlossaryStorage\GlossaryStorageConfig;
 use Spryker\Zed\Kernel\Communication\AbstractPlugin;
-use Spryker\Zed\SynchronizationExtension\Dependency\Plugin\SynchronizationDataQueryContainerPluginInterface;
+use Spryker\Zed\SynchronizationExtension\Dependency\Plugin\SynchronizationDataBulkRepositoryPluginInterface;
 
 /**
- * @deprecated Use `\Spryker\Zed\GlossaryStorage\Communication\Plugin\Synchronization\GlossarySynchronizationDataRepositoryPlugin` instead.
- *
- * @method \Spryker\Zed\GlossaryStorage\Persistence\GlossaryStorageQueryContainerInterface getQueryContainer()
  * @method \Spryker\Zed\GlossaryStorage\Business\GlossaryStorageFacadeInterface getFacade()
  * @method \Spryker\Zed\GlossaryStorage\Communication\GlossaryStorageCommunicationFactory getFactory()
  * @method \Spryker\Zed\GlossaryStorage\GlossaryStorageConfig getConfig()
+ * @method \Spryker\Zed\GlossaryStorage\Persistence\GlossaryStorageRepositoryInterface getRepository()
+ * @method \Spryker\Zed\GlossaryStorage\Persistence\GlossaryStorageQueryContainerInterface getQueryContainer()
  */
-class GlossarySynchronizationDataPlugin extends AbstractPlugin implements SynchronizationDataQueryContainerPluginInterface
+class GlossarySynchronizationDataRepositoryPlugin extends AbstractPlugin implements SynchronizationDataBulkRepositoryPluginInterface
 {
     /**
      * {@inheritDoc}
@@ -51,21 +49,15 @@ class GlossarySynchronizationDataPlugin extends AbstractPlugin implements Synchr
      *
      * @api
      *
+     * @param int $offset
+     * @param int $limit
      * @param int[] $ids
      *
-     * @return \Propel\Runtime\ActiveQuery\ModelCriteria|null
+     * @return \Generated\Shared\Transfer\SynchronizationDataTransfer[]
      */
-    public function queryData($ids = []): ?ModelCriteria
+    public function getData(int $offset, int $limit, array $ids = []): array
     {
-        $query = $this->getQueryContainer()
-            ->queryGlossaryStorageByGlossaryIds($ids)
-            ->orderByIdGlossaryStorage();
-
-        if ($ids === []) {
-            $query->clear();
-        }
-
-        return $query->orderByIdGlossaryStorage();
+        return $this->getFacade()->findGlossaryStorageDataTransferByIds($offset, $limit, $ids);
     }
 
     /**
