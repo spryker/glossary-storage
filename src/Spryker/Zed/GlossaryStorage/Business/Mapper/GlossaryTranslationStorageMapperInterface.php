@@ -10,9 +10,9 @@ namespace Spryker\Zed\GlossaryStorage\Business\Mapper;
 interface GlossaryTranslationStorageMapperInterface
 {
     /**
-     * @param array<\Generated\Shared\Transfer\SpyGlossaryStorageEntityTransfer> $glossaryStorageEntityTransfers
+     * @param array<\Generated\Shared\Transfer\SpyGlossaryStorageEntityTransfer> $glossaryStorageEntityEntityTransfers
      *
      * @return array
      */
-    public function mapGlossaryStorageEntityTransferByGlossaryIdAndLocale(array $glossaryStorageEntityTransfers): array;
+    public function mapGlossaryStorageEntityTransferByGlossaryIdAndLocale(array $glossaryStorageEntityEntityTransfers): array;
 }

@@ -87,9 +87,7 @@ class GlossaryStorageReader implements GlossaryStorageReaderInterface
     {
         if (GlossaryStorageConfig::isCollectorCompatibilityMode()) {
             $clientLocatorClass = Locator::class;
-            /** @var \Generated\Zed\Ide\AutoCompletion&\Spryker\Shared\Kernel\LocatorLocatorInterface $locator */
-            $locator = $clientLocatorClass::getInstance();
-            $glossaryClient = $locator->glossary()->client();
+            $glossaryClient = $clientLocatorClass::getInstance()->glossary()->client();
 
             return $glossaryClient->translate($keyName, $localeName, $parameters);
         }
