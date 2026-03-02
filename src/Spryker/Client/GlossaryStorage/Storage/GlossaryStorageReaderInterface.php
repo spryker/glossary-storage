@@ -9,13 +9,6 @@ namespace Spryker\Client\GlossaryStorage\Storage;
 
 interface GlossaryStorageReaderInterface
 {
-    /**
-     * @param string $keyName
-     * @param string $localeName
-     * @param array $parameters
-     *
-     * @return string
-     */
     public function translate(string $keyName, string $localeName, array $parameters = []): string;
 
     /**

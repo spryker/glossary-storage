@@ -27,11 +27,6 @@ class GlossaryStorageEntityManager extends AbstractEntityManager implements Glos
         }
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\SpyGlossaryStorageEntityTransfer $glossaryStorageEntityTransfer
-     *
-     * @return void
-     */
     protected function saveGlossaryStorageEntity(SpyGlossaryStorageEntityTransfer $glossaryStorageEntityTransfer): void
     {
         $glossaryStorageEntityTransfer->requireFkGlossaryKey();
@@ -49,11 +44,6 @@ class GlossaryStorageEntityManager extends AbstractEntityManager implements Glos
         $glossaryStorage->save();
     }
 
-    /**
-     * @param int $idGlossaryStorage
-     *
-     * @return void
-     */
     public function deleteGlossaryStorageEntity(int $idGlossaryStorage): void
     {
         $glossaryStorage = $this->getFactory()

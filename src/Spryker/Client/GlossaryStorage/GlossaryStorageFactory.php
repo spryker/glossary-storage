@@ -27,25 +27,16 @@ class GlossaryStorageFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Spryker\Client\GlossaryStorage\Dependency\Client\GlossaryStorageToStorageClientInterface
-     */
     public function getStorageClient(): GlossaryStorageToStorageClientInterface
     {
         return $this->getProvidedDependency(GlossaryStorageDependencyProvider::CLIENT_STORAGE);
     }
 
-    /**
-     * @return \Spryker\Client\GlossaryStorage\Dependency\Service\GlossaryStorageToSynchronizationServiceInterface
-     */
     public function getSynchronizationService(): GlossaryStorageToSynchronizationServiceInterface
     {
         return $this->getProvidedDependency(GlossaryStorageDependencyProvider::SERVICE_SYNCHRONIZATION);
     }
 
-    /**
-     * @return \Spryker\Client\GlossaryStorage\Dependency\Service\GlossaryStorageToUtilEncodingServiceInterface
-     */
     public function getUtilEncodingService(): GlossaryStorageToUtilEncodingServiceInterface
     {
         return $this->getProvidedDependency(GlossaryStorageDependencyProvider::SERVICE_UTIL_ENCODING);

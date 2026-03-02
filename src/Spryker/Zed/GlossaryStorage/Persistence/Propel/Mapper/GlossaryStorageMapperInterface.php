@@ -12,12 +12,6 @@ use Orm\Zed\GlossaryStorage\Persistence\SpyGlossaryStorage;
 
 interface GlossaryStorageMapperInterface
 {
-    /**
-     * @param \Orm\Zed\GlossaryStorage\Persistence\SpyGlossaryStorage $glossaryStorage
-     * @param \Generated\Shared\Transfer\SpyGlossaryStorageEntityTransfer $glossaryStorageEntityTransfer
-     *
-     * @return \Orm\Zed\GlossaryStorage\Persistence\SpyGlossaryStorage
-     */
     public function hydrateSpyGlossaryStorageEntity(
         SpyGlossaryStorage $glossaryStorage,
         SpyGlossaryStorageEntityTransfer $glossaryStorageEntityTransfer

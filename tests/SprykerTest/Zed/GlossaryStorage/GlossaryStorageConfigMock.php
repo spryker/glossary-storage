@@ -11,9 +11,6 @@ use Spryker\Zed\GlossaryStorage\GlossaryStorageConfig;
 
 class GlossaryStorageConfigMock extends GlossaryStorageConfig
 {
-    /**
-     * @return bool
-     */
     public function isSendingToQueue(): bool
     {
         return false;

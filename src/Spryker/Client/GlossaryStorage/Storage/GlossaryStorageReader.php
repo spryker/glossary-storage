@@ -61,11 +61,6 @@ class GlossaryStorageReader implements GlossaryStorageReaderInterface
      */
     protected static $storageKeyBuilder;
 
-    /**
-     * @param \Spryker\Client\GlossaryStorage\Dependency\Client\GlossaryStorageToStorageClientInterface $storageClient
-     * @param \Spryker\Client\GlossaryStorage\Dependency\Service\GlossaryStorageToSynchronizationServiceInterface $synchronizationService
-     * @param \Spryker\Client\GlossaryStorage\Dependency\Service\GlossaryStorageToUtilEncodingServiceInterface $utilEncodingService
-     */
     public function __construct(
         GlossaryStorageToStorageClientInterface $storageClient,
         GlossaryStorageToSynchronizationServiceInterface $synchronizationService,
@@ -127,12 +122,6 @@ class GlossaryStorageReader implements GlossaryStorageReaderInterface
         return $translations;
     }
 
-    /**
-     * @param string $keyName
-     * @param string $localeName
-     *
-     * @return string
-     */
     protected function generateStorageKey(string $keyName, string $localeName): string
     {
         $synchronizationDataTransfer = (new SynchronizationDataTransfer())
@@ -142,9 +131,6 @@ class GlossaryStorageReader implements GlossaryStorageReaderInterface
         return $this->getStorageKeyBuilder()->generateKey($synchronizationDataTransfer);
     }
 
-    /**
-     * @return \Spryker\Service\Synchronization\Dependency\Plugin\SynchronizationKeyGeneratorPluginInterface
-     */
     protected function getStorageKeyBuilder(): SynchronizationKeyGeneratorPluginInterface
     {
         if (static::$storageKeyBuilder === null) {
@@ -170,12 +156,6 @@ class GlossaryStorageReader implements GlossaryStorageReaderInterface
         return $glossaryStorageKeys;
     }
 
-    /**
-     * @param string $keyName
-     * @param string $localeName
-     *
-     * @return string
-     */
     protected function getTranslation(string $keyName, string $localeName): string
     {
         $translation = $this->findCachedTranslation($keyName, $localeName);
@@ -240,12 +220,6 @@ class GlossaryStorageReader implements GlossaryStorageReaderInterface
         return $translations + $notFoundTranslations;
     }
 
-    /**
-     * @param string $keyName
-     * @param string $localeName
-     *
-     * @return string|null
-     */
     protected function findCachedTranslation(string $keyName, string $localeName): ?string
     {
         return static::$translationsCache[$localeName][$keyName] ?? null;
@@ -265,13 +239,6 @@ class GlossaryStorageReader implements GlossaryStorageReaderInterface
         );
     }
 
-    /**
-     * @param string $localeName
-     * @param string $keyName
-     * @param string $translation
-     *
-     * @return void
-     */
     protected function cacheTranslation(string $localeName, string $keyName, string $translation): void
     {
         static::$translationsCache[$localeName][$keyName] = $translation;

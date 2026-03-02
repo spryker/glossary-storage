@@ -34,12 +34,6 @@ class GlossaryTranslationStorageDeleter implements GlossaryTranslationStorageDel
      */
     protected $glossaryTranslationStorageMapper;
 
-    /**
-     * @param \Spryker\Zed\GlossaryStorage\Dependency\Facade\GlossaryStorageToEventBehaviorFacadeInterface $eventBehaviorFacade
-     * @param \Spryker\Zed\GlossaryStorage\Persistence\GlossaryStorageRepositoryInterface $glossaryStorageRepository
-     * @param \Spryker\Zed\GlossaryStorage\Persistence\GlossaryStorageEntityManagerInterface $glossaryStorageEntityManager
-     * @param \Spryker\Zed\GlossaryStorage\Business\Mapper\GlossaryTranslationStorageMapperInterface $glossaryTranslationStorageMapper
-     */
     public function __construct(
         GlossaryStorageToEventBehaviorFacadeInterface $eventBehaviorFacade,
         GlossaryStorageRepositoryInterface $glossaryStorageRepository,

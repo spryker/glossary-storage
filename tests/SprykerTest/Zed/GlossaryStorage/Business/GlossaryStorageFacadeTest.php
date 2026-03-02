@@ -67,9 +67,6 @@ class GlossaryStorageFacadeTest extends Unit
         });
     }
 
-    /**
-     * @return void
-     */
     public function testWriteCollectionByGlossaryTranslationEvents(): void
     {
         // Assign
@@ -89,9 +86,6 @@ class GlossaryStorageFacadeTest extends Unit
         $this->assertGlossaryStorage(static::ID_GLOSSARY, $glossaryStorageCount);
     }
 
-    /**
-     * @return void
-     */
     public function testWriteCollectionByGlossaryTranslationEventsPublishesZeroStringValueCorrectly(): void
     {
         // Arrange
@@ -119,9 +113,6 @@ class GlossaryStorageFacadeTest extends Unit
         $this->assertGlossaryStorage($idGlossaryKey, $glossaryStorageEntitiesCount);
     }
 
-    /**
-     * @return void
-     */
     public function testDeleteCollectionByGlossaryKeyEvents(): void
     {
         // Assign
@@ -142,9 +133,6 @@ class GlossaryStorageFacadeTest extends Unit
         $this->assertSame($glossaryStorageCountAfterDeleteFacadeCall, 0);
     }
 
-    /**
-     * @return void
-     */
     public function testWriteCollectionByGlossaryKeyEvents(): void
     {
         // Assign
@@ -162,22 +150,11 @@ class GlossaryStorageFacadeTest extends Unit
         $this->assertGlossaryStorage(static::ID_GLOSSARY, $glossaryStorageCount);
     }
 
-    /**
-     * @param int $idGlossaryKey
-     *
-     * @return void
-     */
     protected function cleanUpGlossaryStorage(int $idGlossaryKey): void
     {
         SpyGlossaryStorageQuery::create()->filterByFkGlossaryKey($idGlossaryKey)->delete();
     }
 
-    /**
-     * @param int $idGlossaryKey
-     * @param int $beforeCount
-     *
-     * @return void
-     */
     protected function assertGlossaryStorage(int $idGlossaryKey, int $beforeCount): void
     {
         $glossaryStorageCount = $this->createGlossaryStorageQuery()->filterByFkGlossaryKey($idGlossaryKey)->count();
@@ -196,33 +173,21 @@ class GlossaryStorageFacadeTest extends Unit
         $this->assertSame($glossaryKeyEntity->getSpyGlossaryTranslations()->getFirst()->getValue(), $glossaryTranslationEntityTransfer->getValue());
     }
 
-    /**
-     * @return \Orm\Zed\Glossary\Persistence\SpyGlossaryTranslationQuery
-     */
     protected function createGlossaryTranslationQuery(): SpyGlossaryTranslationQuery
     {
         return SpyGlossaryTranslationQuery::create();
     }
 
-    /**
-     * @return \Orm\Zed\GlossaryStorage\Persistence\SpyGlossaryStorageQuery
-     */
     protected function createGlossaryStorageQuery(): SpyGlossaryStorageQuery
     {
         return SpyGlossaryStorageQuery::create();
     }
 
-    /**
-     * @return \Orm\Zed\Glossary\Persistence\SpyGlossaryKeyQuery
-     */
     protected function createGlossaryKeyQuery(): SpyGlossaryKeyQuery
     {
         return SpyGlossaryKeyQuery::create();
     }
 
-    /**
-     * @return \Spryker\Zed\GlossaryStorage\Business\GlossaryStorageFacade
-     */
     protected function getGlossaryStorageFacade(): GlossaryStorageFacade
     {
         $factory = new GlossaryStorageBusinessFactory();
@@ -234,11 +199,6 @@ class GlossaryStorageFacadeTest extends Unit
         return $facade;
     }
 
-    /**
-     * @param int|null $idGlossaryKey
-     *
-     * @return \Orm\Zed\Glossary\Persistence\SpyGlossaryKey|null
-     */
     protected function findGlossaryKeyEntity(?int $idGlossaryKey = null): ?SpyGlossaryKey
     {
         if ($idGlossaryKey === null) {

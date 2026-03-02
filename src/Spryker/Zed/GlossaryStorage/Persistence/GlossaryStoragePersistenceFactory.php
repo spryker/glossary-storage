@@ -49,17 +49,11 @@ class GlossaryStoragePersistenceFactory extends AbstractPersistenceFactory
         return new GlossaryStorageMapper();
     }
 
-    /**
-     * @return \Orm\Zed\Glossary\Persistence\SpyGlossaryTranslationQuery
-     */
     public function getGlossaryTranslationQuery(): SpyGlossaryTranslationQuery
     {
         return $this->getProvidedDependency(GlossaryStorageDependencyProvider::PROPEL_QUERY_GLOSSARY_TRANSLATION);
     }
 
-    /**
-     * @return \Orm\Zed\Glossary\Persistence\SpyGlossaryKeyQuery
-     */
     public function getGlossaryKeyQuery(): SpyGlossaryKeyQuery
     {
         return $this->getProvidedDependency(GlossaryStorageDependencyProvider::PROPEL_QUERY_GLOSSARY_KEY);

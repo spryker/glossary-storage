@@ -16,10 +16,5 @@ interface GlossaryStorageEntityManagerInterface
      */
     public function saveGlossaryStorageEntities(array $glossaryStorageEntityTransfers): void;
 
-    /**
-     * @param int $idGlossaryStorage
-     *
-     * @return void
-     */
     public function deleteGlossaryStorageEntity(int $idGlossaryStorage): void;
 }

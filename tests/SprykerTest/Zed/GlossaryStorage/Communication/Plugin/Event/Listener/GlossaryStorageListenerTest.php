@@ -63,9 +63,6 @@ class GlossaryStorageListenerTest extends Unit
         });
     }
 
-    /**
-     * @return void
-     */
     public function testGlossaryWriterPublisherPluginSavesData(): void
     {
         // Prepare
@@ -86,9 +83,6 @@ class GlossaryStorageListenerTest extends Unit
         $this->assertGlossaryStorage(static::ID_GLOSSARY, $beforeCount);
     }
 
-    /**
-     * @return void
-     */
     public function testGlossaryDeletePublisherPluginDeletesData(): void
     {
         // Prepare
@@ -106,9 +100,6 @@ class GlossaryStorageListenerTest extends Unit
         $this->assertSame(0, SpyGlossaryStorageQuery::create()->filterByFkGlossaryKey(static::ID_GLOSSARY)->count());
     }
 
-    /**
-     * @return void
-     */
     public function testGlossaryTranslationWritePublisherPluginSavesData(): void
     {
         // Prepare
@@ -131,9 +122,6 @@ class GlossaryStorageListenerTest extends Unit
         $this->assertGlossaryStorage(static::ID_GLOSSARY, $beforeCount);
     }
 
-    /**
-     * @return void
-     */
     public function testGlossaryTranslationStorageListenerDeletesDataForInactiveTranslations(): void
     {
         // Prepare
@@ -171,9 +159,6 @@ class GlossaryStorageListenerTest extends Unit
         $this->assertLessThan($beforeCount, $glossaryStorageCount);
     }
 
-    /**
-     * @return void
-     */
     public function testGlossaryTranslationStorageListenerDeletesDataForEmptyTranslations(): void
     {
         // Prepare
@@ -213,22 +198,11 @@ class GlossaryStorageListenerTest extends Unit
         $this->assertLessThan($beforeCount, $glossaryStorageCount);
     }
 
-    /**
-     * @param int $idGlossaryKey
-     *
-     * @return void
-     */
     protected function cleanUpGlossaryStorage(int $idGlossaryKey): void
     {
         SpyGlossaryStorageQuery::create()->filterByFkGlossaryKey($idGlossaryKey)->delete();
     }
 
-    /**
-     * @param int $idGlossaryKey
-     * @param int $beforeCount
-     *
-     * @return void
-     */
     protected function assertGlossaryStorage(int $idGlossaryKey, int $beforeCount): void
     {
         $glossaryStorageCount = $this->createGlossaryStorageQuery()->filterByFkGlossaryKey($idGlossaryKey)->count();
@@ -242,9 +216,6 @@ class GlossaryStorageListenerTest extends Unit
         $this->assertSame('Products were removed successfully', $spyGlossaryStorage->getData()['value']);
     }
 
-    /**
-     * @return \Spryker\Zed\GlossaryStorage\Business\GlossaryStorageFacade
-     */
     protected function getGlossaryStorageFacade(): GlossaryStorageFacade
     {
         $factory = new GlossaryStorageBusinessFactory();
@@ -256,17 +227,11 @@ class GlossaryStorageListenerTest extends Unit
         return $facade;
     }
 
-    /**
-     * @return \Orm\Zed\Glossary\Persistence\SpyGlossaryTranslationQuery
-     */
     protected function createGlossaryTranslationQuery(): SpyGlossaryTranslationQuery
     {
         return SpyGlossaryTranslationQuery::create()::create();
     }
 
-    /**
-     * @return \Orm\Zed\GlossaryStorage\Persistence\SpyGlossaryStorageQuery
-     */
     protected function createGlossaryStorageQuery(): SpyGlossaryStorageQuery
     {
         return SpyGlossaryStorageQuery::create();

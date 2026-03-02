@@ -32,9 +32,6 @@ class GlossaryStorageToGlossaryQueryContainerBridge implements GlossaryStorageTo
         return $this->glossaryQueryContainer->queryTranslations();
     }
 
-    /**
-     * @return \Orm\Zed\Glossary\Persistence\SpyGlossaryKeyQuery
-     */
     public function queryKeys(): SpyGlossaryKeyQuery
     {
         return $this->glossaryQueryContainer->queryKeys();

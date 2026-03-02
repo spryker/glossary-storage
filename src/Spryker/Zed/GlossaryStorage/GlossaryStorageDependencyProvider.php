@@ -80,11 +80,6 @@ class GlossaryStorageDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return void
-     */
     protected function addEventBehaviorFacade(Container $container): void
     {
         $container->set(static::FACADE_EVENT_BEHAVIOR, function (Container $container) {
@@ -92,11 +87,6 @@ class GlossaryStorageDependencyProvider extends AbstractBundleDependencyProvider
         });
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return void
-     */
     protected function addGlossaryTranslateQuery(Container $container): void
     {
         $container->set(static::PROPEL_QUERY_GLOSSARY_TRANSLATION, $container->factory(function (): SpyGlossaryTranslationQuery {
@@ -104,11 +94,6 @@ class GlossaryStorageDependencyProvider extends AbstractBundleDependencyProvider
         }));
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return void
-     */
     protected function addGlossaryKeyQuery(Container $container): void
     {
         $container->set(static::PROPEL_QUERY_GLOSSARY_KEY, $container->factory(function (): SpyGlossaryKeyQuery {
