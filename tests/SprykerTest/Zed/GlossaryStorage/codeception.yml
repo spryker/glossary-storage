@@ -23,6 +23,7 @@ suites:
                 - \SprykerTest\Shared\Testify\Helper\LocatorHelper
                 - \SprykerTest\Shared\Testify\Helper\DependencyHelper
                 - \SprykerTest\Shared\Propel\Helper\ConnectionHelper
+                - \SprykerTest\Shared\Propel\Helper\TransactionHelper
                 - \SprykerTest\Shared\Glossary\Helper\TranslationHelper
                 - \SprykerTest\Client\Testify\Helper\ClientHelper
                 - \SprykerTest\Zed\Publisher\Helper\PublishAndSynchronizeHelper
@@ -40,6 +41,7 @@ suites:
                 - \SprykerTest\Shared\Testify\Helper\ConfigHelper
                 - \SprykerTest\Shared\Testify\Helper\LocatorHelper
                 - \SprykerTest\Shared\Propel\Helper\ConnectionHelper
+                - \SprykerTest\Shared\Propel\Helper\TransactionHelper
                 - \SprykerTest\Shared\Testify\Helper\DependencyHelper
                 - \SprykerTest\Shared\Glossary\Helper\TranslationHelper
                 - \SprykerTest\Service\Container\Helper\ContainerHelper
