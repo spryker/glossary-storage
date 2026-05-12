@@ -8,13 +8,17 @@
 namespace Spryker\Zed\GlossaryStorage\Persistence;
 
 use Generated\Shared\Transfer\SpyGlossaryStorageEntityTransfer;
+use Orm\Zed\GlossaryStorage\Persistence\SpyGlossaryStorage;
 use Spryker\Zed\Kernel\Persistence\AbstractEntityManager;
+use Spryker\Zed\Propel\Persistence\BatchProcessor\ActiveRecordBatchProcessorTrait;
 
 /**
  * @method \Spryker\Zed\GlossaryStorage\Persistence\GlossaryStoragePersistenceFactory getFactory()
  */
 class GlossaryStorageEntityManager extends AbstractEntityManager implements GlossaryStorageEntityManagerInterface
 {
+    use ActiveRecordBatchProcessorTrait;
+
     /**
      * @param array<\Generated\Shared\Transfer\SpyGlossaryStorageEntityTransfer> $glossaryStorageEntityTransfers
      *
@@ -22,26 +26,47 @@ class GlossaryStorageEntityManager extends AbstractEntityManager implements Glos
      */
     public function saveGlossaryStorageEntities(array $glossaryStorageEntityTransfers): void
     {
+        $glossaryStorageEntityMap = $this->getGlossaryStorageEntityMap($glossaryStorageEntityTransfers);
+        $mapper = $this->getFactory()->createGlossaryStorageMapper();
+
         foreach ($glossaryStorageEntityTransfers as $glossaryStorageEntityTransfer) {
-            $this->saveGlossaryStorageEntity($glossaryStorageEntityTransfer);
+            $glossaryStorageEntityTransfer->requireFkGlossaryKey();
+
+            $fkGlossaryKey = $glossaryStorageEntityTransfer->getFkGlossaryKeyOrFail();
+            $locale = $glossaryStorageEntityTransfer->getLocale() ?? '';
+
+            $glossaryStorage = $glossaryStorageEntityMap[$fkGlossaryKey][$locale] ?? new SpyGlossaryStorage();
+            $glossaryStorage = $mapper->hydrateSpyGlossaryStorageEntity($glossaryStorage, $glossaryStorageEntityTransfer);
+
+            $this->persist($glossaryStorage);
         }
+
+        $this->commit();
     }
 
-    protected function saveGlossaryStorageEntity(SpyGlossaryStorageEntityTransfer $glossaryStorageEntityTransfer): void
+    /**
+     * @param array<\Generated\Shared\Transfer\SpyGlossaryStorageEntityTransfer> $glossaryStorageEntityTransfers
+     *
+     * @return array<int, array<string, \Orm\Zed\GlossaryStorage\Persistence\SpyGlossaryStorage>>
+     */
+    protected function getGlossaryStorageEntityMap(array $glossaryStorageEntityTransfers): array
     {
-        $glossaryStorageEntityTransfer->requireFkGlossaryKey();
+        $fkGlossaryKeys = array_map(
+            static fn (SpyGlossaryStorageEntityTransfer $transfer) => $transfer->getFkGlossaryKeyOrFail(),
+            $glossaryStorageEntityTransfers,
+        );
 
-        $glossaryStorage = $this->getFactory()
+        $glossaryStorageEntities = $this->getFactory()
             ->createGlossaryStorageQuery()
-            ->filterByFkGlossaryKey($glossaryStorageEntityTransfer->getFkGlossaryKey())
-            ->filterByLocale($glossaryStorageEntityTransfer->getLocale())
-            ->findOneOrCreate();
+            ->filterByFkGlossaryKey_In($fkGlossaryKeys)
+            ->find();
 
-        $glossaryStorage = $this->getFactory()
-            ->createGlossaryStorageMapper()
-            ->hydrateSpyGlossaryStorageEntity($glossaryStorage, $glossaryStorageEntityTransfer);
+        $glossaryStorageEntityMap = [];
+        foreach ($glossaryStorageEntities as $glossaryStorageEntity) {
+            $glossaryStorageEntityMap[$glossaryStorageEntity->getFkGlossaryKey()][$glossaryStorageEntity->getLocale()] = $glossaryStorageEntity;
+        }
 
-        $glossaryStorage->save();
+        return $glossaryStorageEntityMap;
     }
 
     public function deleteGlossaryStorageEntity(int $idGlossaryStorage): void
