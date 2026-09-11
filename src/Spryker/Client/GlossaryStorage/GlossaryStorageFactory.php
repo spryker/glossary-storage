@@ -11,20 +11,27 @@ use Spryker\Client\GlossaryStorage\Dependency\Client\GlossaryStorageToStorageCli
 use Spryker\Client\GlossaryStorage\Dependency\Service\GlossaryStorageToSynchronizationServiceInterface;
 use Spryker\Client\GlossaryStorage\Dependency\Service\GlossaryStorageToUtilEncodingServiceInterface;
 use Spryker\Client\GlossaryStorage\Storage\GlossaryStorageReader;
+use Spryker\Client\GlossaryStorage\Storage\GlossaryStorageReaderInterface;
 use Spryker\Client\Kernel\AbstractFactory;
 
 class GlossaryStorageFactory extends AbstractFactory
 {
+    protected static GlossaryStorageReaderInterface|null $translator = null;
+
     /**
      * @return \Spryker\Client\GlossaryStorage\Storage\GlossaryStorageReaderInterface
      */
     public function createTranslator()
     {
-        return new GlossaryStorageReader(
-            $this->getStorageClient(),
-            $this->getSynchronizationService(),
-            $this->getUtilEncodingService(),
-        );
+        if (static::$translator === null) {
+            return static::$translator = new GlossaryStorageReader(
+                $this->getStorageClient(),
+                $this->getSynchronizationService(),
+                $this->getUtilEncodingService(),
+            );
+        }
+
+        return static::$translator;
     }
 
     public function getStorageClient(): GlossaryStorageToStorageClientInterface
