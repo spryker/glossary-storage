@@ -7,9 +7,9 @@
 
 namespace Spryker\Shared\GlossaryStorage;
 
-use Spryker\Shared\Kernel\AbstractBundleConfig;
+use Spryker\Shared\Kernel\AbstractSharedConfig;
 
-class GlossaryStorageConfig extends AbstractBundleConfig
+class GlossaryStorageConfig extends AbstractSharedConfig
 {
     /**
      * @api
